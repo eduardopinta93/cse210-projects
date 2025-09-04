@@ -4,69 +4,69 @@ class Program
 {
     static void Main(string[] args)
     {
-        string lettery;
+        string letter;
         Console.WriteLine("Hello, what is your grade percentage?");
         int percentage = int.Parse(Console.ReadLine());
         int lastDigit = percentage % 10;
 
         if (percentage >= 90)
         {
-            lettery = "A";
+            letter = "A";
             if (lastDigit < 3)
             {
-                lettery = "A-";
+                letter = "A-";
             }
         }
         else if (percentage >= 80)
         {
-            lettery = "B";
+            letter = "B";
             if (lastDigit < 3)
             {
-                lettery = "B-";
+                letter = "B-";
             }
             else if (lastDigit >= 7)
             {
-                lettery = "B+";
+                letter = "B+";
             }
         }
         else if (percentage >= 70)
         {
-            lettery = "C";
+            letter = "C";
             if (lastDigit < 3)
             {
-                lettery = "C-";
+                letter = "C-";
             }
             else if (lastDigit >= 7)
             {
-                lettery = "C+";
+                letter = "C+";
             }
         }
         else if (percentage >= 60)
         {
-            lettery = "D";
+            letter = "D";
              if (lastDigit < 3)
             {
-                lettery = "D-";
+                letter = "D-";
             }
             else if (lastDigit >= 7)
             {
-                lettery = "D+";
+                letter = "D+";
             }
         }
         else
         {
-            lettery = "F";
+            letter = "F";
         }
 
         if (percentage >= 70)
         {
             Console.WriteLine("Congratulation you passed the course!");
-            Console.WriteLine($"Your grade is {lettery}");
+            Console.WriteLine($"Your grade is {letter}");
         }
         else
         {
             Console.WriteLine("You did not pass the course, work harder");
-            Console.WriteLine($"Your grade is {lettery}");
+            Console.WriteLine($"Your grade is {letter}");
         }
     }
 }
