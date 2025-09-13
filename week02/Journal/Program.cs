@@ -76,38 +76,3 @@ class Program
         }
     }
 }
-/*Pasos lógicos en case "1"
-
-Usar el PromptGenerator para obtener un prompt aleatorio.
-
-Mostrar ese prompt al usuario con Console.WriteLine.
-
-Leer lo que el usuario escriba con Console.ReadLine.
-
-Crear un nuevo objeto Entry y asignarle:
-
-La fecha actual → con DateTime.Now.ToShortDateString().
-
-El prompt generado.
-
-El texto del usuario.
-
-Llamar a journal.AddEntry(newEntry) para agregarlo a la lista.
-
-Ejemplo de la lógica dentro del case "1" (sin código exacto todavía, solo explicación con pasos):
-
-Generar prompt: "What was the best part of my day?"
-
-Mostrarlo al usuario → “Prompt: … escribe tu respuesta:”
-
-Usuario escribe → “Salir a caminar con mi perro”.
-
-Crear Entry:
-
-_date = "9/13/2025"
-
-_promptText = "What was the best part of my day?"
-
-_entryText = "Salir a caminar con mi perro"
-
-Guardar en el Journal con AddEntry.*/
