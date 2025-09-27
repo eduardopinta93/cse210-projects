@@ -4,11 +4,32 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the OnlineOrdering Project.");
+        Product product1 = new Product("Wireless Mouse", 101, 25.50, 2);
+        Product product2 = new Product("USB-C Charger", 102, 19.99, 1);
+        Product product3 = new Product("Bluetooth Headphones", 201, 59.991, 1);
+        Product product4 = new Product("Laptop Sleeve", 202, 29.99, 2);
+
+        Address address1 = new Address("123 Main Street", "Los Angeles", "California", "United States");
+        Customer customer1 = new Customer("Paulina", address1);
+        Address address2 = new Address("789 Queen Street", "Toronto", "Ontario", "Canada");
+        Customer customer2 = new Customer("Ariadna", address2);
+
+        Order order1 = new Order(customer1);
+        Order order2 = new Order(customer2);
+
+        order1.AddProduct(product1);
+        order1.AddProduct(product2);
+        order2.AddProduct(product3);
+        order2.AddProduct(product4);
+
+        string one = $"{order1.GetPackingLabel()}\n{order1.GetShippingLabel()}\nTotal Price: ${order1.GetTotalPrice()}\n";
+        string two = $"{order2.GetPackingLabel()}\n{order2.GetShippingLabel()}\nTotal Price: ${order2.GetTotalPrice()}\n";
+
+        Console.WriteLine($"{one}\n{two}");
     }
 }
 
-//Online Ordering Program
+
 class Address
 {
     private string Street;
@@ -26,11 +47,19 @@ class Address
 
     public bool InUsa()
     {
-        return true;
+        if (Country.Contains("United"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public string GetFullAddress()
     {
-        return "";
+        string fullAddress = $"Street: {Street}\nCity: {City}\nState: {State}\nCountry: {Country} ";
+        return fullAddress;
     }
 }
 
@@ -47,11 +76,18 @@ class Customer
     }
     public bool LivesInUSA()
     {
-        return true;
+        if (Address.InUsa())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public string GetName()
     {
-        return "";
+        return Name;
     }
     public Address GetAddress()
     {
@@ -73,14 +109,28 @@ class Product
         PricePerUnit = price;
         Quantity = quantity;
     }
+
+    public string GetName()
+    {
+        return Name;
+    }
+    public int GetId()
+    {
+        return ProductId;
+    }
     public double GetTotalCost()
 
     {
-        return 0;
+        double total = PricePerUnit * Quantity;
+        return total;
     }
     public void GetProductInfo()
     {
-
+        Console.WriteLine("Product details:");
+        Console.WriteLine($"Name: {Name}");
+        Console.WriteLine($"Id: {ProductId}");
+        Console.WriteLine($"Price: {PricePerUnit}");
+        Console.WriteLine($"Quantity: {Quantity}");
     }
 }
 
@@ -92,23 +142,44 @@ class Order
 
     public Order(Customer customer)
     {
-        Products = new List<Product>();
         Customer = customer;
     }
     public void AddProduct(Product product)
     {
-
+        Products.Add(product);
     }
-    public void GetTotalPrice()
+    public double GetTotalPrice()
     {
-
+        double total = 0;
+        foreach (Product p in Products)
+        {
+            total += p.GetTotalCost();
+        }
+        if (Customer.LivesInUSA())
+        {
+            total += 5;
+        }
+        else
+        {
+            total += 35;    
+        }
+        return total;
     }
     public string GetPackingLabel()
     {
-        return "";
+        string label = "PACKING LABEL:\n";
+        foreach (Product p in Products)
+        {
+            label += $"Product: {p.GetName()}\n";
+            label += $"Id: {p.GetId()}\n";
+        }
+        return label;
     }
     public string GetShippingLabel()
     {
-        return "";
+        string label = $"SHIPPING LABEL:\n";
+        label += $"Customer Name: {Customer.GetName()}\n";
+        label += $"Address \n{Customer.GetAddress().GetFullAddress()}\n";
+        return label;
     }
 }
